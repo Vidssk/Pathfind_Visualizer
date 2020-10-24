@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/Pathfind_Visualizer/static/css/main.3a170fc6.chunk.css",
+    "main.js": "/Pathfind_Visualizer/static/js/main.94bcb43d.chunk.js",
+    "main.js.map": "/Pathfind_Visualizer/static/js/main.94bcb43d.chunk.js.map",
+    "runtime-main.js": "/Pathfind_Visualizer/static/js/runtime-main.0cc6e84e.js",
+    "runtime-main.js.map": "/Pathfind_Visualizer/static/js/runtime-main.0cc6e84e.js.map",
+    "static/js/2.4da63542.chunk.js": "/Pathfind_Visualizer/static/js/2.4da63542.chunk.js",
+    "static/js/2.4da63542.chunk.js.map": "/Pathfind_Visualizer/static/js/2.4da63542.chunk.js.map",
+    "index.html": "/Pathfind_Visualizer/index.html",
+    "precache-manifest.c7229fea74d5148e473f54e78cb26875.js": "/Pathfind_Visualizer/precache-manifest.c7229fea74d5148e473f54e78cb26875.js",
+    "service-worker.js": "/Pathfind_Visualizer/service-worker.js",
+    "static/css/main.3a170fc6.chunk.css.map": "/Pathfind_Visualizer/static/css/main.3a170fc6.chunk.css.map",
+    "static/js/2.4da63542.chunk.js.LICENSE.txt": "/Pathfind_Visualizer/static/js/2.4da63542.chunk.js.LICENSE.txt",
+    "static/media/TAM-Logo.svg": "/Pathfind_Visualizer/static/media/TAM-Logo.1c0f67af.svg",
+    "static/media/button.svg": "/Pathfind_Visualizer/static/media/button.bb819594.svg",
+    "static/media/logo.svg": "/Pathfind_Visualizer/static/media/logo.5d5d9eef.svg",
+    "static/media/neural.30d44924.svg": "/Pathfind_Visualizer/static/media/neural.30d44924.svg",
+    "static/media/wall.svg": "/Pathfind_Visualizer/static/media/wall.352768cd.svg",
+    "static/media/weight.svg": "/Pathfind_Visualizer/static/media/weight.89834ae4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0cc6e84e.js",
+    "static/js/2.4da63542.chunk.js",
+    "static/css/main.3a170fc6.chunk.css",
+    "static/js/main.94bcb43d.chunk.js"
+  ]
+}
