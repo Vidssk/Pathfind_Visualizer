@@ -1,0 +1,14 @@
+.Wrapper{
+    align-content: center ;
+    margin-top: 15px;
+
+    justify-content: center;
+    background-color: white;
+}
+.rowWrapper {
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    
+}
+

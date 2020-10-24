@@ -1,0 +1,26 @@
+.node {
+  width: 27px;
+  height: 27px;
+  border: 1px solid  #242526;
+  background-color: #484a4d;
+
+}
+
+.node-start svg{
+    fill: var(#242526);
+    width: auto;
+    height: auto;
+    
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.node-end svg{
+  fill: var(#242526);
+  width: auto;
+  height: auto;
+  
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
