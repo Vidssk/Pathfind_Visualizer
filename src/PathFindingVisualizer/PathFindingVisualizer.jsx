@@ -3,9 +3,13 @@ import Node from './Node/Node';
 import Astar from '../algorithms/Astar'
 //import {dijkstra, getNodesInShortestPathOrder} from '../algorithms/dijkstra';
 import './PathFindingVisualizer.css';
-
-const cols = 60;
-const rows = 23;
+import Footer from '../layout/Footer'
+import Key from '../layout/Key'
+import Header from '../layout/Header'
+//const cols = 25;
+//const rows = 10;
+const cols = 50;
+const rows = 20;
 const START_NODE_ROW = 0;
 const START_NODE_COL = 0;
 const END_NODE_ROW = rows-1;
@@ -14,6 +18,7 @@ const END_NODE_COL = cols-1;
 const PathfindingVisualizer = () => {
     const [Grid, setGrid] = React.useState([]);
     const[Path, setPath] = React.useState([]);
+    const[VisitedNodes, setVisitedNodes] = React.useState([]);
 
     React.useEffect(() =>{
         initializeGrid();
@@ -34,7 +39,10 @@ const PathfindingVisualizer = () => {
         const startNode = grid[START_NODE_ROW][START_NODE_COL]
         const endNode = grid[END_NODE_ROW][END_NODE_COL];
         let path= Astar(startNode,endNode);
-        setPath(path);
+        startNode.isWall=false;
+        endNode.isWall=false;
+        setPath(path.path);
+        setVisitedNodes(path.visitedNodes);
     };
     
     //parses through grid creating personal spots for each point
@@ -63,6 +71,8 @@ const PathfindingVisualizer = () => {
         this.g =0;
         this.f=0;
         this.h=0;
+        this.isWall = false;
+        if(Math.random(1)<.2){this.isWall=true;}
         this.neighbours=[];
         this.previous= undefined;
         this.addneighbors = function(grid){
@@ -84,20 +94,48 @@ const PathfindingVisualizer = () => {
                 return (
                     <div key={rowIndex} className = "rowWrapper">
                         {row.map((col,colIndex) => {
-                            const {isStart, isEnd}= col;
+                            const {isStart, isEnd, isWall}= col;
 
-                            return <Node  key={colIndex} isStart={isStart} isEnd={isEnd} row={rowIndex} col={colIndex}></Node>;
+                            return <Node key={colIndex} isStart={isStart} isEnd={isEnd} row={rowIndex} col={colIndex} isWall={isWall}></Node>;
                         })}
                     </div>
                 );
             })}
         </div>
     );
+    const visualizeShortestPath= (shortestPathNodes) => {
+        for(let i =0;i<shortestPathNodes.length;i++){
+            setTimeout(() => {
+                var node= shortestPathNodes[i];
+                document.getElementById(`node-${node.y}-${node.x}`).className="node node-shortest-path";
+            } ,10*i);
+            }
+    }
+    const visualizePath =()=>{
+        for(let i =0;i<=VisitedNodes.length;i++){
+            if(i===VisitedNodes.length){
+                setTimeout(()=>{
+                    visualizeShortestPath(Path);
+                },20*i);
+            }else{
+                setTimeout(() => {
+                    var node= VisitedNodes[i];
+                    document.getElementById(`node-${node.y}-${node.x}`).className=
+                    'node node-visited';     
+                },20*i);
+            }
+        }
+    };
             console.log(Path);
     return(
+       <div> 
+           <Header click={visualizePath}/>
+           <Key/>
         <div className = "Wrapper">
             {gridwithNode}
             
+        </div>
+        <Footer/>
         </div>
     );
 }

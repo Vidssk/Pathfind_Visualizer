@@ -5,15 +5,16 @@ import '../App.css';
 import '../index.css';
 import {ReactComponent as AlgorithmIcon } from '../icons/neural.svg';
 import Astar from '../algorithms/Astar'
-let Algorithms = ['DFS','BFS','Dijkstra','A* Search', 'Greedy BFS', 'Swarm Algorithm','Convergent Swarm', 'Bidirectional Swarm'];
+let Algorithms = ['Depth-first search','Breath-first search','Dijkstra','A* Search', 'Greedy BFS', 'Swarm Algorithm','Convergent Swarm', 'Bidirectional Swarm'];
 let Mazes= ['Recursive Division', 'Recursive Division (vertical skew)','Recursive Division (horizontal skew)', 'Random', 'Basic Weight','Simple Stair Pattern'];
 let NavItems=['Visualize','Algorithms','Maze','Clear Grid'];
-let VisualizeKey="none";
+let VisualizeKey="Visualize";
 let triggered=0;
-let VisualButtonText='Visualize'
-function Header(){
+let DropDownSelect=0;
+let VisualButtonText='Visualize';
+function Header(props){
     return(
-        <Navbar id='top'>
+        <Navbar id='top' click={props.click}>
         </Navbar>
 
     )
@@ -24,40 +25,49 @@ function Navbar(props){
       <nav className="navbar">
         <ul className="navbar-nav">
             <h1 id="Title"><img src={logo} className="App-logo" alt="logo"/>PathFind Visualizer</h1>
-            <NavItem id = 'Visualize'  key={VisualizeKey} />
+            <Visualize id = 'Visualize' key={VisualizeKey} click={props.click} />
             <NavItem  name="Algorithms">
                 <DropDownMenu types="algo" />
             </NavItem>
-            <NavItem name="Maze"><DropDownMenu types="maze"/></NavItem>
-            <NavItem name="Construct Mazes">
-                <DropDownMenu types="maze"/>
+            <NavItem name="Construct Mazes"><DropDownMenu types="maze"/></NavItem>
+            <NavItem name="Add Bomb">
             </NavItem>
             <NavItem name="Clear Grid"/>
-            <NavItem name={<AlgorithmIcon />} 
-            dropped={<DropDownMenu types="algo"/>}>
-    
-            </NavItem>
+            <NavItem name="About Project"/>
         </ul>
       </nav>
     );
 }
+function Visualize(props) {
+    return (
+        <li className="nav-item">
+          <a href="#" className="icon-button"onClick={props.click}>
+              {VisualizeKey}
+          </a>
+        </li>
+      );
+    }
 function NavItem(props) {
     const[open, setOpen] = useState(false);
     var ToggleDrop=() => {
-
-        setOpen(!open);
-        if(props.id==="Visualize" && triggered===0 && VisualizeKey!=="none"){
+        setOpen(!open)
+      /*  if(name==="Algorithms"&&DropDownSelect!==1 && !open){setOpen(!open);DropDownSelect=1;}
+        if(name==="Algorithms"&&DropDownSelect===1 && open){setOpen(!open);DropDownSelect=0;}
+        if(name==="Construct Mazes"&&DropDownSelect!==1 && !open){setOpen(!open);DropDownSelect=1;}
+        if(name==="Construct Mazes"&&DropDownSelect===1 && open){setOpen(!open);DropDownSelect=0;}
+        console.log(DropDownSelect);*/
+        if(props.id==="Visualize" && triggered===0 && VisualizeKey!=="Visualize"){
             triggered++;
-            clicked(props);
-            console.log(triggered);
+            console.log(VisualizeKey);
         }else if(props.id==="Visualize" && triggered!==0){
-            triggered=0;    
+            triggered=0;
         }
     }
+
     return (
       <li className="nav-item">
         <a href="#" className="icon-button"onClick={ToggleDrop}>
-            {props.name}
+            {props.name || VisualizeKey}
         </a>
         {(open && props.children)}
       </li>
@@ -65,11 +75,11 @@ function NavItem(props) {
 }
 
 var clicked= (AlgorithmKey)=>{
-    console.log(AlgorithmKey);
+    VisualizeKey="Visualize "+AlgorithmKey;
+    console.log(VisualizeKey);
 
 }
 function DropDownMenu(props) {
-
     function DropdownItem(props) {
         return (
       <a href="#" className="menu-item" onClick={()=> props.children && clicked(props.children)}>
@@ -91,7 +101,7 @@ function DropDownMenu(props) {
     };
     
     return (
-      <div className="dropdown">
+      <div className="dropdown" >
           {usedList(props)}
       </div>
     );
